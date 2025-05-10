@@ -26,3 +26,27 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    valores = {}
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        for linea in file:
+            partes = linea.strip().split("\t")
+            columna_5 = partes[4]  
+
+            pares = columna_5.split(",")
+            for par in pares:
+                clave, valor = par.split(":")
+                valor = int(valor)
+
+                if clave in valores:
+                    valores[clave]["min"] = min(valores[clave]["min"], valor)
+                    valores[clave]["max"] = max(valores[clave]["max"], valor)
+                else:
+                    valores[clave] = {"min": valor, "max": valor}
+
+    resultado = []
+    for clave in sorted(valores.keys()):
+        resultado.append((clave, valores[clave]["min"], valores[clave]["max"]))
+    return resultado
+
+if __name__ == "__main__":
+    print(pregunta_06())

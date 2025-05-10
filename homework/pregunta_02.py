@@ -15,3 +15,18 @@ def pregunta_02():
     [('A', 8), ('B', 7), ('C', 5), ('D', 6), ('E', 14)]
 
     """
+    conteo = {}
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        for linea in file:
+            partes = linea.strip().split("\t") 
+            letra = partes[0]
+            if letra in conteo:
+                conteo[letra] += 1
+            else:
+                conteo[letra] = 1
+
+    resultado = sorted(conteo.items())
+    return resultado
+
+if __name__ == "__main__":
+    print(pregunta_02())

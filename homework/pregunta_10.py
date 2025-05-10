@@ -20,3 +20,17 @@ def pregunta_10():
 
 
     """
+    resultado = []
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        for linea in file:
+            partes = linea.strip().split("\t")
+            letra = partes[0]
+            col4 = partes[3].split(",") if partes[3] else []
+            col5 = partes[4].split(",") if partes[4] else []
+            resultado.append((letra, len(col4), len(col5)))
+
+    return resultado
+
+if __name__ == "__main__":
+    print(pregunta_10())
